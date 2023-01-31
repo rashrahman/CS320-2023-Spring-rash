@@ -51,25 +51,29 @@ fun size_helper(xs: 'a xlist, count: int): int=
 fun xlist_size(xs: 'a xlist): int =
     size_helper(xs, 0)
     
-fun sub_helper(xs: 'a xslist, pos: int) 'a=
-  
-    if pos =0
-    then
-	case xs of
-	xlist_nil => XListSubscript
-	|
-    	xlist_snoc(xs, x1) => x1
-    else
-	case xs of
-	xlist_nil => XListSubscript
-	|
-	xlist_cons(x1, xs) => sub_helper(xs, pos-1)
+fun sub_helper(xs: 'a xlist, pos: int, count: int, len: int): 'a=
+
+   case xs of
+   xlist_nil => XlistSubscript
+   |
+   xlist_cons(x1, xs) =>
+    if pos = count
+    then x1
+    else sub_helper(xs, pos, count+1)
+   |
+   xlist_snoc(xs, x1) =>
+    if pos = xlist_size(xs)-1
+    then x1
+    else sub_helper(xs, pos, xlist_size(xs) -1)
+   |
+   xlist_append(xs, ys) =>
+    if pos - count < xlist_size(xs)
+    then sub_helper(xs, pos-count, 0)
+    else sub_helper(ys, pos - count- xlist_size(xs),0)
+   |
+   xlist_reverse(xs) => sub_helper(xs, pos, count)
+    
 	
 
-
 fun xlist_sub(xs: 'a xlist, i0: int): 'a =
-    if i0 < 0
-    then raise XlistSubscript
-    else if i0 >= xlist_size(xs)
-    then raise XListSubscript
-    sub_helper(xs, i0)
+    sub_helper(xs, i0,0)
