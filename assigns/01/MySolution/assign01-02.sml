@@ -13,16 +13,16 @@ fun sub_helper(xs: 'a xlist, i0: int): 'a=
     else sub_helper(xs, i0-1)
    |
    xlist_snoc(xs, x1) =>
-    if i0 = xlist_size(xs)-1
+    if i0 = xlist_size(xs)
     then x1
-    else sub_helper(xs, i0+1)
+    else sub_helper(xs, i0)
    |
    xlist_append(xs, ys) =>
     if i0 < xlist_size(xs)
     then sub_helper(xs, i0)
     else sub_helper(ys, i0 - xlist_size(xs))
    |
-   xlist_reverse(xs) => sub_helper(xs, xlist_size(xs)- i0 -1)
+   xlist_reverse(xs) => sub_helper(xs, xlist_size(xs)- i0-1)
     
 	
 
