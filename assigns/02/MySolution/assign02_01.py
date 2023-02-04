@@ -12,3 +12,9 @@ print("[import ./../assign02.py] is done!")
 # mylist_reverse (see list_reverse in assign02.sml)
 #
 ####################################################
+
+def mylist_append(xs, ys):
+    if len(xs) == 0:
+        return ys
+    else:
+        xs[0] + mylist_append(xs[1,len(xs)-1], ys)
