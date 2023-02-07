@@ -49,6 +49,8 @@ int5_sort_nr(xs) for every 5-tuple xs of the type int5.
 *)
 (* ****** ****** *)
 
+fun int5_help(xs: int5): int5 =
+
 fun
 int5_sort_nr(xs: int5): int5 =
 (*
