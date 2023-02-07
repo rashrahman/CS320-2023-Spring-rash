@@ -1,4 +1,4 @@
-AA(* ****** ****** *)
+(* ****** *****AA* *)
 
 (*
 HX-2023-02-07: 40 points
@@ -173,27 +173,30 @@ fun card5_fullhouse(cs: card5): bool
 *)
 
 
-fun card5_fullhouse(cs: card5): bool =
-
-let fun help1(a: int, b:int):
-    if a = b andalso b=c andalso d=e andalso d<>a
+fun help1(cs: card5): bool =
+    if card_rank(#1(cs))  = card_rank(#2(cs)) andalso card_rank(#1(cs)) = card_rank(#3(cs)) andalso card_rank(#4(cs)) = card_rank(#5(cs))  
     then true
-    else if a=c andalso a=d andalso b=e andalso b<>a
+    else if card_rank(#1(cs)) =card_rank(#3(cs)) andalso card_rank(#1(cs))=card_rank(#4(cs)) andalso card_rank(#2(cs))=card_rank(#5(cs)) 
     then true
-    else if a=d andalso d=e andalso b=c andalso b<>a
+    else if card_rank(#1(cs))=card_rank(#4(cs)) andalso card_rank(#4(cs))=card_rank(#5(cs)) andalso card_rank(#2(cs))=card_rank(#3(cs)) 
     then true
-    else if a=c andalso a=e  andalso d=b andalso b<>a
+    else if card_rank(#1(cs))=card_rank(#3(cs)) andalso card_rank(#1(cs))=card_rank(#5(cs))  andalso card_rank(#4(cs))=card_rank(#2(cs)) 
     then true
-    else if b=c andalso b=e  andalso d=a andalso b<>a
+    else if card_rank(#2(cs))=card_rank(#3(cs)) andalso card_rank(#2(cs))=card_rank(#5(cs))  andalso card_rank(#4(cs))=card_rank(#1(cs))
     then true
-    else if a=b andalso a=e andalso d=c andalso d<>a
+    else if card_rank(#1(cs))=card_rank(#2(cs)) andalso card_rank(#1(cs))=card_rank(#5(cs)) andalso card_rank(#4(cs))=card_rank(#3(cs))
     then true
-     else if d=c andalso d=e  andalso a=b andalso d<>a
+     else if card_rank(#4(cs))=card_rank(#3(cs)) andalso card_rank(#4(cs))=card_rank(#5(cs))  andalso card_rank(#1(cs))=card_rank(#2(cs)) 
      then true
-     else if b=d andalso b=e  andalso a=c andalso b<>a
+     else if card_rank(#2(cs))=card_rank(#4(cs)) andalso card_rank(#2(cs))=card_rank(#5(cs))  andalso card_rank(#1(cs))=card_rank(#3(cs)) 
      then true
-in
-  help1(rank2int(ra
+     else if card_rank(#2(cs))=card_rank(#4(cs)) andalso card_rank(#2(cs))=card_rank(#3(cs))  andalso card_rank(#1(cs))=card_rank(#5(cs)) 
+     then true
+     else if card_rank(#2(cs))=card_rank(#1(cs)) andalso card_rank(#2(cs))=card_rank(#4(cs))  andalso card_rank(#5(cs))=card_rank(#3(cs)) 
+     then true
+     else false
+fun card5_fullhouse(cs: card5): bool = 
+  help1(cs)
 (*
 Please Give your implementation as follows:
 *)
