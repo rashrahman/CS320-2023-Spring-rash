@@ -1,0 +1,4 @@
+use "./../assign00-lib.sml";
+
+fun reverse(cs: string, index: int): string=
+    

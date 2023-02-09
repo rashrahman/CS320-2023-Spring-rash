@@ -1,0 +1,27 @@
+use "./../assign01-lib.sml";
+use "./../MySolution/assign00-04.sml";
+
+fun char2int(cs: string, index: int): int =
+    Char.ord(String.sub(cs,index))-48
+
+fun check (cs: string, index: int): bool =
+    if char2int(cs, index) <= 0 and char2int(cs,index) <= 9
+    then true
+    else false
+
+fun doStr(cs: string, index: int): bool =
+    if String.size(cs) = 0
+    then false
+    else if String.size(cs) - 1 = index
+    then check(cs, index)
+    else if check(cs, index)
+    then doStr(cs, index+1)
+    else false
+
+fun helper (cs: string): int option=
+    if doStr(cs, 0) = true
+    then SOME(str2int(cs))
+    else NONE
+
+fun str2int_opt(cs: strng): int option =
+    helper(cs)

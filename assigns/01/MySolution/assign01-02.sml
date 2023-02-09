@@ -27,4 +27,6 @@ fun sub_helper(xs: 'a xlist, i0: int): 'a=
 	
 
 fun xlist_sub(xs: 'a xlist, i0: int): 'a =
-    sub_helper(xs, i0)
+    if i0 < 0
+    then raise XlistSubscript
+    else sub_helper(xs, i0)
