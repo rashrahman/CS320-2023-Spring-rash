@@ -31,11 +31,13 @@ of a set is insignificant.
 *)
 (* ****** ****** *)
 
-(*
-val
-list_subsets =
-fn(xs: 'a list) => ...
-*)
+
+val list_subsets = fn(xs: 'a list) =>
+    if list_length(xs) =0
+    then [[]]
+    else if list_length(xs) =1
+    then [xs]
+    else list_foldleft(xs, [[]], fn(x1,x2) => x1 @ list_map(x1, fn(xs) => x2::xs)) 
 
 (* ****** ****** *)
 
