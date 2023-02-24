@@ -21,10 +21,7 @@ Please implement the following third-order
 function that turns a forall function into
 an exists function
 //
-fun
-forall_to_exists
-(forall: ('xs,'x0)forall_t): ('xs,'x0)exists_t
-//
+
 *)
 
 (* ****** ****** *)
