@@ -25,11 +25,17 @@ list_pairing([1,2,3,4]) = ([(1,4),(2,3)], NONE)
 //
 *)
 (* ****** ****** *)
-(*
-fun
-list_pairing
-(xs: 'a list): ('a * 'a) list * 'a option = ...
-*)
+
+fun list_pairing(xs: 'a list): ('a * 'a) list * 'a option =
+    let
+        fun helper(ys: 'a list, acc: ('a * 'a) list) =
+            case ys of
+                [] => (acc, NONE)
+              | [x] => (acc, SOME x)
+              | x::xs' => helper(list_reverse(xs'), (x, hd xs')::acc)
+    in
+        helper(xs, [])
+    end
 (* ****** ****** *)
 
 (* end of [CS320-2023-Spring-midterm1-list_pairing.sml] *)
