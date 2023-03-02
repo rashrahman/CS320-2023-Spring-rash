@@ -29,12 +29,14 @@ is insignificant.
 (* ****** ****** *)
 
 
-fun list_nchoose2(xs : int list) : (int * int) list =
-     case xs of
-        [] => []
-      | x::xs' => List.foldr (fn (y, acc) =>
-                        if x <= y then (x,y)::acc else acc) [] xs' @ list_nchoose2 xs'
-
+fun
+list_nchoose2(xs: int list): (int * int) list =
+  let
+    val num = foreach_to_ifoldleft(list_foreach)(xs, [], fn (acc,i,x) => (x,i) :: acc)
+    val cross = list_cross2_row(num,num)
+   in
+    list_map(list_filter(cross, fn((x,i1),(y,i2)) => x <= y andalso i1 <> i2), fn((x,i1),(y,i2)) => (x,y))
+   end
 (* ****** ****** *)
 
 (* end of [CS320-2023-Spring-midterm1-list_nchoose2.sml] *)
