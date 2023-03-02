@@ -30,10 +30,24 @@ functions in your implementation of list_averages.
 //
 *)
 (* ****** ****** *)
-(*
-fun
-list_averages(xs: real list): real list = ...
-*)
+
+
+fun list_averages(xs: real list): real list =
+  let
+    fun helper(xs': real list, count: real, sum: real): real list =
+      case xs' of
+        [] => []
+      | x::xs'' => 
+          let
+            val sum2 =  sum + x  
+            val count2 = count + 1.0
+          in
+            (sum2 / count2) :: helper(xs'', count2, sum2)
+          end
+  in
+    helper(xs, 0.0, 0.0)
+  end
+
 (* ****** ****** *)
 
 (* end of [CS320-2023-Spring-midterm1-list_averages.sml] *)
