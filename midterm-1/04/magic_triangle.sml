@@ -57,11 +57,23 @@ the previous.
 
 (* ****** ****** *)
 
-fun helper (xs: int list list, a: int):
+fun helper(xs : int list) : int list =
+    let
+    fun sums (xs : int list) : int list =
+        case xs of
+        [] => [] | [x] => [] | x :: y :: xs => (x + y) :: sums(y :: xs)
+    in
+        1 :: sums(xs) @ [1]
+    end
 
-fun
-magic_triangle (n : int) : int list list = ...
-
+fun magic_triangle (n : int) : int list list =
+    let
+    fun help (n : int, prev : int list, count : int list list, x : int) : int list list =
+        case x >= n of
+        true => count | false => help(n,helper(prev), helper(prev) :: count, x+1)
+    	in
+          if n = 0 then [] else list_reverse(help(n,[1],[[1]], 1))
+        end
 (* ****** ****** *)
 
 (* end of [CS320-2023-Spring-midterm1-magic_triangle.sml] *)
