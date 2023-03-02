@@ -57,10 +57,10 @@ the previous.
 
 (* ****** ****** *)
 
-(*
+fun helper (xs: int list list, a: int):
+
 fun
 magic_triangle (n : int) : int list list = ...
-*)
 
 (* ****** ****** *)
 
