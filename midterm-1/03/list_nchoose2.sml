@@ -28,10 +28,12 @@ is insignificant.
 
 (* ****** ****** *)
 
-(*
-fun
-list_nchoose2(xs: int list): (int * int) list = ...
-*)
+
+fun list_nchoose2(xs : int list) : (int * int) list =
+     case xs of
+        [] => []
+      | x::xs' => List.foldr (fn (y, acc) =>
+                        if x <= y then (x,y)::acc else acc) [] xs' @ list_nchoose2 xs'
 
 (* ****** ****** *)
 
