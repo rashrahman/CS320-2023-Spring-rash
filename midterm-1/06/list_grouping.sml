@@ -30,20 +30,20 @@ val
 intmin =
 fn(x, y) => if x <= y then x else y
 
-val list_grouping = fn(xs: int list) =>
-  let
-    val n = int_max(1, list_length(xs) div 3)
-    val num_groups = (list_length(xs) + n - 1) div n
-    val group_indices = fn(i: int) =>
-      let
-        val first = i * n
-        val last = intmin(list_length(xs), first + n)
-      in
-        (first, last - 1)
-      end
-  in
-    list_tabulate(num_groups, group_indices)
-  end
+fun count_Num(x: int, xs: int list): int =
+      list_length(list_filter(xs, fn y => x = y))
+
+fun build_pair(x: int, xs: int list): (int * int) =
+      (count_Num(x, xs), x)
+
+fun build_grouping(xs: int list): (int * int) list =
+      list_map(
+        list_reduce_left(xs, [], fn(acc, x) => if list_exists(acc, fn (n, y) => x = y) then acc else list_extend(acc, build_pair(x, xs))),
+        fn (n, x) => build_pair(x, xs))
+	
+fun list_grouping(xs: int list): (int * int) list =
+  build_grouping(xs)
+  
 
 (* ****** ****** *)
 
