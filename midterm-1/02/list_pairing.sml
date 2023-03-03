@@ -26,16 +26,30 @@ list_pairing([1,2,3,4]) = ([(1,4),(2,3)], NONE)
 *)
 (* ****** ****** *)
 
-fun list_pairing(xs: 'a list): ('a * 'a) list * 'a option =
-    let
-        fun helper(ys: 'a list, acc: ('a * 'a) list) =
-            case ys of
-                [] => (acc, NONE)
-              | [x] => (acc, SOME x)
-              | x::xs' => helper(list_reverse(xs'), (x, hd xs')::acc)
-    in
-        helper(xs, [])
-    end
 (* ****** ****** *)
+
+fun take (n: int) (xs: 'a list): 'a list =
+  if n <= 0 then []
+  else
+  case xs of
+         [] => []
+       | x :: xs' => x :: take (n-1) xs'
+
+fun nth (xs: 'a list) (n: int): 'a =
+  if n < 0 then raise Subscript
+  else
+  case xs of
+         [] => raise Subscript
+       | x :: xs' => if n = 0 then x else nth xs' (n-1)
+
+fun
+list_pairing
+(xs: 'a list): ('a * 'a) list * 'a option =
+  let
+    val mid = if length xs mod 2 = 0 then NONE else SOME (nth xs (length xs div 2))
+    val pairs = list_zip2 (take (length xs div 2) xs, take (length xs div 2) (rev xs))
+  in
+    (pairs, mid)
+  end
 
 (* end of [CS320-2023-Spring-midterm1-list_pairing.sml] *)

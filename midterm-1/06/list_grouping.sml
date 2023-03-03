@@ -22,11 +22,28 @@ two seconds)
 //
 *)
 (* ****** ****** *)
+val
+int_max =
+fn(x, y) => if x >= y then x else y
 
-(*
-fun
-list_grouping(xs: int list): (int * int) list = ...
-*)
+val
+intmin =
+fn(x, y) => if x <= y then x else y
+
+val list_grouping = fn(xs: int list) =>
+  let
+    val n = int_max(1, list_length(xs) div 3)
+    val num_groups = (list_length(xs) + n - 1) div n
+    val group_indices = fn(i: int) =>
+      let
+        val first = i * n
+        val last = intmin(list_length(xs), first + n)
+      in
+        (first, last - 1)
+      end
+  in
+    list_tabulate(num_groups, group_indices)
+  end
 
 (* ****** ****** *)
 

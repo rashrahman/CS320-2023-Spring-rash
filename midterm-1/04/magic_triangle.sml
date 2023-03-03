@@ -72,7 +72,9 @@ fun magic_triangle (n : int) : int list list =
         case x >= n of
         true => count | false => help(n,helper(prev), helper(prev) :: count, x+1)
     	in
-          if n = 0 then [] else list_reverse(help(n,[1],[[1]], 1))
+          if n = 0
+	  then list_reverse(help(1,[1],[[1]], 1))
+	  else list_reverse(help(n+1,[1],[[1]],1))
         end
 (* ****** ****** *)
 
